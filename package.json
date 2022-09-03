@@ -13,7 +13,8 @@
     "vscode": "^1.71.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Snippets"
   ],
   "contributes": {
     "languages": [
@@ -36,6 +37,12 @@
         "language": "kahroba",
         "scopeName": "source.kahroba",
         "path": "./syntaxes/kahroba.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "kahroba",
+        "path": "./snippets/kahroba.json"
       }
     ]
   }
