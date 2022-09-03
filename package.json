@@ -4,6 +4,11 @@
   "description": "Kahroba language support for Visual Studio Code",
   "version": "1.0.0",
   "publisher": "Amirhossein Malekian",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kahroba-lang/vscode"
+  },
+  "icon": "./images/kahroba.png",
   "engines": {
     "vscode": "^1.71.0"
   },
