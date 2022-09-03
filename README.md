@@ -1,65 +1,41 @@
-# kahroba README
+# Kahroba extension for Visual Studio Code
+This extension contains Kahroba Snippets and Commands.
+## Installation
+Launch _Quick Open_:
 
-This is the README for your extension "kahroba". After writing up a brief description, we recommend including the following sections.
+- _Linux_ : `Ctrl+P`
+- _macOS_ : `⌘P`
+- _Windows_ : `Ctrl+P`
+
+Paste the following command and press `Enter`:
+
+```shell
+ext install AmirhosseinMalekian.kahroba
+```
+
+## Quick start
+-   **Step 1.** [Install a supported version of Kahroba on your system](https://github.com/kahroba-lang/kahroba)
+-   **Step 2.** [Install the Kahroba extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=AmirhosseinMalekian.kahroba).
+-   **Step 3.** Open or create a Kahroba file and start coding!
 
 ## Features
+* [Code snippets] - Code snippets are templates that make it easier to enter repeating code patterns, such as loops or conditional-statements.
+* [Code editing] - Support for saved snippets, formatting.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## Supported file extensions
+* (.kahroba)
+* (.khb)
 
-For example if there is an image subfolder under your extension project workspace:
+## Snippets
+Below is a list of all available snippets and the triggers of each one. The **⇥** means the `TAB` key.
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+| Snippet | Content                                       |
+| ------- | --------------------------------------------- |
+| `in→`   | input                                 |
+| `fn→`  | function declaration                      |
+| `for→`  | for loop                               |
+| `ie→`  | if/else statement                       |
+| `if→` | if statement             |
+| `el→`  | else statement                             |
+| `pl→`  | println                |
+| `p→`    | print                            |
