@@ -1,0 +1,588 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Kahroba",
+	"scopeName": "source.kahroba",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"comment": "Syntax error using arrays",
+			"match": "\\[\\](\\s+)",
+			"captures": {
+				"1": {
+					"name": "invalid.illegal.array.kahroba"
+				}
+			}
+		},
+		{
+			"comment": "Syntax error numeric literals",
+			"match": "\\b0[0-7]*[89]\\d*\\b",
+			"name": "invalid.illegal.numeric.kahroba"
+		},
+		{
+			"comment": "Built-in functions",
+			"match": "\\b(len|swap|print|println|input)\\b(?=\\()",
+			"name": "support.function.builtin.kahroba"
+		},
+		{
+			"comment": "Function declarations",
+			"match": "^(\\bfn\\b)(?:\\s+(\\([^\\)]+\\)\\s+)?(\\w+)(?=\\())?",
+			"captures": {
+				"1": {
+					"name": "keyword.function.kahroba"
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#brackets"
+						},
+						{
+							"include": "#operators"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"match": "\\d\\w*",
+							"name": "invalid.illegal.identifier.kahroba"
+						},
+						{
+							"match": "\\w+",
+							"name": "entity.name.function.kahroba"
+						}
+					]
+				}
+			}
+		},
+		{
+			"comment": "Functions",
+			"match": "(\\bfn\\b)|(\\w+)(?=\\()",
+			"captures": {
+				"1": {
+					"name": "keyword.function.kahroba"
+				},
+				"2": {
+					"patterns": [
+						{
+							"match": "\\d\\w*",
+							"name": "invalid.illegal.identifier.kahroba"
+						},
+						{
+							"match": "\\w+",
+							"name": "support.function.kahroba"
+						}
+					]
+				}
+			}
+		},
+		{
+			"include": "#numeric_literals"
+		},
+		{
+			"comment": "Language constants",
+			"match": "\\b(true|false)\\b",
+			"name": "constant.language.kahroba"
+		},
+		{
+			"match": "\\b\\w+(?=\\s*=)",
+			"captures": {
+				"0": {
+					"patterns": [
+						{
+							"match": "\\d\\w*",
+							"name": "invalid.illegal.identifier.kahroba"
+						},
+						{
+							"match": "\\w+",
+							"name": "variable.other.assignment.kahroba"
+						},
+						{
+							"include": "#delimiters"
+						}
+					]
+				}
+			}
+		},
+		{
+			"include": "#brackets"
+		},
+		{
+			"include": "#delimiters"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#operators"
+		}
+	],
+	"repository": {
+		"strings": {
+			"name": "string.quoted.double.kahroba",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.kahroba",
+					"match": "\\\\."
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.kahroba",
+					"begin": "(\\/\\/)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.comment.kahroba"
+						}
+					},
+					"end": "(?:\\n|$)"
+				}
+			]
+		},
+		"brackets": {
+			"patterns": [
+				{
+					"begin": "{",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.begin.bracket.curly.kahroba"
+						}
+					},
+					"end": "}",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.end.bracket.curly.kahroba"
+						}
+					},
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
+				},
+				{
+					"begin": "\\(",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.begin.bracket.round.kahroba"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.end.bracket.round.kahroba"
+						}
+					},
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
+				},
+				{
+					"match": "\\[|\\]",
+					"name": "punctuation.definition.bracket.square.kahroba"
+				}
+			]
+		},
+		"operators": {
+			"comment": "Note that the order here is very important!",
+			"patterns": [
+				{
+					"match": "(==|!=|<=|>=|<(?!<)|>(?!>))",
+					"name": "keyword.operator.comparison.kahroba"
+				},
+				{
+					"match": "(!)",
+					"name": "keyword.operator.logical.kahroba"
+				},
+				{
+					"match": "(=)",
+					"name": "keyword.operator.assignment.kahroba"
+				},
+				{
+					"match": "(\\+|\\-|\\*|/)",
+					"name": "keyword.operator.arithmetic.kahroba"
+				},
+				{
+					"match": "\\.\\.",
+					"name": "keyword.operator.dotdot.kahroba"
+				}
+			]
+		},
+		"numeric_literals": {
+			"match": "(?<!\\w)\\.?\\d(?:(?:[0-9a-zA-Z_\\.])|(?<=[eEpP])[+-])*",
+			"captures": {
+				"0": {
+					"patterns": [
+						{
+							"begin": "(?=.)",
+							"end": "(?:\\n|$)",
+							"patterns": [
+								{
+									"match": "(?:(?:(?:(?:(?:\\G(?=[0-9.])(?!0[xXbBoO])([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?(?:(?<!_)([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?(i(?!\\w))?(?:\\n|$)|\\G(?=[0-9.])(?!0[xXbBoO])([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?<!_)([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))|\\G((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?:(?<!_)([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?(i(?!\\w))?(?:\\n|$))|(\\G0[xX])_?([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?(?<!_)([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))|(\\G0[xX])_?([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?<!_)([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))|(\\G0[xX])((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?<!_)([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))",
+									"captures": {
+										"1": {
+											"name": "constant.numeric.decimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"2": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"3": {
+											"name": "constant.numeric.decimal.point.kahroba"
+										},
+										"4": {
+											"name": "constant.numeric.decimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"5": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"6": {
+											"name": "keyword.other.unit.exponent.decimal.kahroba"
+										},
+										"7": {
+											"name": "keyword.operator.plus.exponent.decimal.kahroba"
+										},
+										"8": {
+											"name": "keyword.operator.minus.exponent.decimal.kahroba"
+										},
+										"9": {
+											"name": "constant.numeric.exponent.decimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"10": {
+											"name": "keyword.other.unit.imaginary.kahroba"
+										},
+										"11": {
+											"name": "constant.numeric.decimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"12": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"13": {
+											"name": "keyword.other.unit.exponent.decimal.kahroba"
+										},
+										"14": {
+											"name": "keyword.operator.plus.exponent.decimal.kahroba"
+										},
+										"15": {
+											"name": "keyword.operator.minus.exponent.decimal.kahroba"
+										},
+										"16": {
+											"name": "constant.numeric.exponent.decimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"17": {
+											"name": "keyword.other.unit.imaginary.kahroba"
+										},
+										"18": {
+											"name": "constant.numeric.decimal.point.kahroba"
+										},
+										"19": {
+											"name": "constant.numeric.decimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"20": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"21": {
+											"name": "keyword.other.unit.exponent.decimal.kahroba"
+										},
+										"22": {
+											"name": "keyword.operator.plus.exponent.decimal.kahroba"
+										},
+										"23": {
+											"name": "keyword.operator.minus.exponent.decimal.kahroba"
+										},
+										"24": {
+											"name": "constant.numeric.exponent.decimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"25": {
+											"name": "keyword.other.unit.imaginary.kahroba"
+										},
+										"26": {
+											"name": "keyword.other.unit.hexadecimal.kahroba"
+										},
+										"27": {
+											"name": "constant.numeric.hexadecimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"28": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"29": {
+											"name": "constant.numeric.hexadecimal.kahroba"
+										},
+										"30": {
+											"name": "constant.numeric.hexadecimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"31": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"32": {
+											"name": "keyword.other.unit.exponent.hexadecimal.kahroba"
+										},
+										"33": {
+											"name": "keyword.operator.plus.exponent.hexadecimal.kahroba"
+										},
+										"34": {
+											"name": "keyword.operator.minus.exponent.hexadecimal.kahroba"
+										},
+										"35": {
+											"name": "constant.numeric.exponent.hexadecimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"36": {
+											"name": "keyword.other.unit.imaginary.kahroba"
+										},
+										"37": {
+											"name": "keyword.other.unit.hexadecimal.kahroba"
+										},
+										"38": {
+											"name": "constant.numeric.hexadecimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"39": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"40": {
+											"name": "keyword.other.unit.exponent.hexadecimal.kahroba"
+										},
+										"41": {
+											"name": "keyword.operator.plus.exponent.hexadecimal.kahroba"
+										},
+										"42": {
+											"name": "keyword.operator.minus.exponent.hexadecimal.kahroba"
+										},
+										"43": {
+											"name": "constant.numeric.exponent.hexadecimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"44": {
+											"name": "keyword.other.unit.imaginary.kahroba"
+										},
+										"45": {
+											"name": "keyword.other.unit.hexadecimal.kahroba"
+										},
+										"46": {
+											"name": "constant.numeric.hexadecimal.kahroba"
+										},
+										"47": {
+											"name": "constant.numeric.hexadecimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"48": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"49": {
+											"name": "keyword.other.unit.exponent.hexadecimal.kahroba"
+										},
+										"50": {
+											"name": "keyword.operator.plus.exponent.hexadecimal.kahroba"
+										},
+										"51": {
+											"name": "keyword.operator.minus.exponent.hexadecimal.kahroba"
+										},
+										"52": {
+											"name": "constant.numeric.exponent.hexadecimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"53": {
+											"name": "keyword.other.unit.imaginary.kahroba"
+										}
+									}
+								},
+								{
+									"match": "(?:(?:(?:\\G(?=[0-9.])(?!0[xXbBoO])([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(i(?!\\w))?(?:\\n|$)|(\\G0[bB])_?([01](?:[01]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(i(?!\\w))?(?:\\n|$))|(\\G0[oO]?)_?((?:[0-7]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))+)(i(?!\\w))?(?:\\n|$))|(\\G0[xX])_?([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(i(?!\\w))?(?:\\n|$))",
+									"captures": {
+										"1": {
+											"name": "constant.numeric.decimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"2": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"3": {
+											"name": "keyword.other.unit.imaginary.kahroba"
+										},
+										"4": {
+											"name": "keyword.other.unit.binary.kahroba"
+										},
+										"5": {
+											"name": "constant.numeric.binary.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"6": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"7": {
+											"name": "keyword.other.unit.imaginary.kahroba"
+										},
+										"8": {
+											"name": "keyword.other.unit.octal.kahroba"
+										},
+										"9": {
+											"name": "constant.numeric.octal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"10": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"11": {
+											"name": "keyword.other.unit.imaginary.kahroba"
+										},
+										"12": {
+											"name": "keyword.other.unit.hexadecimal.kahroba"
+										},
+										"13": {
+											"name": "constant.numeric.hexadecimal.kahroba",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.kahroba"
+												}
+											]
+										},
+										"14": {
+											"name": "punctuation.separator.constant.numeric.kahroba"
+										},
+										"15": {
+											"name": "keyword.other.unit.imaginary.kahroba"
+										}
+									}
+								},
+								{
+									"match": "(?:(?:[0-9a-zA-Z_\\.])|(?<=[eEpP])[+-])+",
+									"name": "invalid.illegal.constant.numeric.kahroba"
+								}
+							]
+						}
+					]
+				}
+			}
+		},
+		"delimiters": {
+			"patterns": [
+				{
+					"match": ",",
+					"name": "punctuation.other.comma.kahroba"
+				},
+				{
+					"match": "\\.(?!\\.\\.)",
+					"name": "punctuation.other.period.kahroba"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"comment": "Flow control keywords",
+					"match": "\\b(else|for|if|in|return)\\b",
+					"name": "keyword.control.kahroba"
+				},
+				{
+					"match": "\\bfn\\b",
+					"name": "keyword.function.kahroba"
+				}
+			]
+		}
+	}
+}

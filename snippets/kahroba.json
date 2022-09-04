@@ -1,0 +1,42 @@
+{
+	"if statement": {
+		"prefix": "if",
+		"body": "if ${1:condition} {\n\t$0\n}",
+		"description": "Code snippet for an if statement"
+	},
+	"if/else statement": {
+		"prefix": "ie",
+		"body": "if ${1:condition} {\n\t$2\n} else {\n\t$0\n}",
+		"description": "Code snippet for an if statement with else"
+	},
+	"else": {
+		"prefix": "el",
+		"body": "else {\n\t$0\n}",
+		"description": "Code snippet for an else"
+	},
+	"for": {
+		"prefix": "for",
+		"body": "for ${1:target_list} in ${2:expression_list} {\n\t$0\n}",
+		"description": "Code snippet for a for loop"
+	},
+	"function declaration": {
+		"prefix": "fn",
+		"body": "fn ${1:funcname}(${2:parameter_list}) {\n\t$0\n}",
+		"description": "Snippet for function declaration"
+	},
+	"println": {
+		"prefix": "pl",
+		"body": "println(\"$1\")",
+		"description": "Snippet for println()"
+	},
+	"print": {
+		"prefix": "p",
+		"body": "print(\"$1\")",
+		"description": "Snippet for print()"
+	},
+	"input": {
+		"prefix": "in",
+		"body": "input(\"$1\")",
+		"description": "Snippet for input()"
+	}
+}
