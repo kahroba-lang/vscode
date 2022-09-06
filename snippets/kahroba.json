@@ -38,5 +38,19 @@
 		"prefix": "in",
 		"body": "input(\"$1\")",
 		"description": "Snippet for input()"
+	},
+	"arr": {
+		"prefix": "arr",
+		"body": [
+			"arr = [ ]"
+		],
+		"description": "Snippet for array"
+	},
+	"map": {
+		"prefix": "map",
+		"body": [
+			"map = { \"key\": \"value\" }"
+		],
+		"description": "Snippet for map"
 	}
 }
