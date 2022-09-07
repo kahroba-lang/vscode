@@ -39,3 +39,5 @@ Below is a list of all available snippets and the triggers of each one. The **�
 | `el→`  | else statement                             |
 | `pl→`  | println                |
 | `p→`    | print                            |
+| `arr→`  | array  |
+| `map→` | map |
