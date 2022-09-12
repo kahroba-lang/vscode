@@ -19,12 +19,13 @@ ext install AmirhosseinMalekian.kahroba
 -   **Step 3.** Open or create a Kahroba file and start coding!
 
 ## Features
+* [Code autocompletion] - Autocompletion for Kahroba keywords, functions, and variables.
 * [Code snippets] - Code snippets are templates that make it easier to enter repeating code patterns, such as loops or conditional-statements.
-* [Code editing] - Support for saved snippets, formatting.
+* [Highlighting] - Syntax highlighting for Kahroba code.
 
 ## Supported file extensions
 * (.kahroba)
-* (.khb)
+* (.krb)
 
 ## Snippets
 Below is a list of all available snippets and the triggers of each one. The **⇥** means the `TAB` key.

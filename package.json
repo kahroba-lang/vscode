@@ -2,7 +2,7 @@
   "name": "kahroba",
   "displayName": "Kahroba",
   "description": "Kahroba language support for Visual Studio Code",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "publisher": "AmirhosseinMalekian",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
         ],
         "extensions": [
           ".kahroba",
-          ".khb"
+          ".krb"
         ],
         "configuration": "./language-configuration.json"
       }
